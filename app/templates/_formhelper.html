@@ -1,0 +1,16 @@
+{% macro render_field(field) %}
+<div class="form-group">
+  
+  {% if field.type == 'BooleanField' %}
+    {{ field.label }}
+  {% endif %}
+
+  {{ field(**kwargs)|safe }}
+  {% if field.errors %}
+  {% for error in field.errors %}
+  <small id="" class="form-text text-danger">{{ error }}</small>
+  {% endfor %}
+  {% endif %}
+</div>
+
+{% endmacro %}

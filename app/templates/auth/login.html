@@ -1,0 +1,29 @@
+{% extends 'auth/layout.html' %}
+
+{% block form %}
+
+{% from "_formhelper.html" import render_field %}
+
+<div class="auth-form">
+    <div class="auth-title">
+        <h5>Sign in</h5>
+    </div>
+    
+    <form method="POST" action="{{url_for('auth.login')}}">
+
+        {{ form.csrf_token }}
+        {{ render_field(form.email, size="20", class="form-control", placeholder="Email") }}
+        {{ render_field(form.password, class="form-control", placeholder="Password") }}
+        {{ render_field(form.remember_me, class="form-check form-check-inline") }}
+        <br>
+        <input type="submit" value="Sign in" class="btn btn-primary">
+
+    </form>
+    <div class="form-group">
+        <a href="{{ url_for('auth.reset_password_request') }}">Forgot password ?</a>
+        <p> New to reddit? <a href="{{ url_for('auth.register') }}">Sign up Here</a></p>
+    </div>
+
+</div>
+
+{% endblock %}
