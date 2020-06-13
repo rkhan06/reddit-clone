@@ -15,7 +15,7 @@ class LoginForm(FlaskForm):
 
 
 class RegisterForm(FlaskForm):
-    name = StringField('Name', validators=[DataRequired()])
+    username = StringField('Username', validators=[DataRequired()])
     email = StringField('Email', validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[DataRequired()])
     confirm_password = PasswordField('Confirm password', validators=[
@@ -26,6 +26,11 @@ class RegisterForm(FlaskForm):
         user = User.query.filter_by(email=email.data).first()
         if user is not None:
             raise ValidationError('This email address is already registered')
+
+    def validate_username(self, username):
+        user = User.query.filter_by(username=username.data).first()
+        if user is not None:
+            raise ValidationError('This username is taken')
 
 
 class PasswordResetForm(FlaskForm):

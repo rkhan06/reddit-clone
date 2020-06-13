@@ -18,11 +18,11 @@ class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(120), unique=True)
     password_hash = db.Column(db.String(128))
-    name = db.Column(db.String(50))
+    username = db.Column(db.String(50), unique=True)
 
-    def __init__(self, email, name):
+    def __init__(self, email, username):
         self.email = email
-        self.name = name
+        self.username = username
 
     def get_reset_password_token(self, expires_in=600):
         return jwt.encode(
@@ -49,4 +49,4 @@ class User(UserMixin, db.Model):
         return check_password_hash(self.password_hash, raw_password)
 
     def __repr__(self):
-        return '<User %r>' % (self.name)
+        return '<User %r>' % (self.username)

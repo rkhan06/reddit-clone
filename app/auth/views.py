@@ -38,7 +38,7 @@ def register():
         return redirect(url_for('core.index'))
     form = RegisterForm()
     if form.validate_on_submit():
-        new_user = User(name=form.name.data, email=form.email.data)
+        new_user = User(username=form.username.data, email=form.email.data)
         new_user.set_password(raw_password=form.password.data)
         db.session.add(new_user)
         db.session.commit()
