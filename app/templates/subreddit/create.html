@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% from "_formhelper.html" import render_field %}
+
+<h3>Create Community</h3>
+
+    <form method="POST" action="">
+
+        {{ form.csrf_token }}
+        {{ render_field(form.name, class="form-control", placeholder="Community Name") }}
+        {{ render_field(form.description, class="form-control", placeholder="Description") }}
+        <br>
+        <input type="submit" value="Create" class="btn btn-primary">
+
+    </form>
+</div>
+{% endblock %}

@@ -12,6 +12,12 @@ def load_user(user_id):
     return User.query.filter_by(id=user_id).first()
 
 
+subs = db.Table('subs',
+                db.Column('user_id', db.Integer, db.ForeignKey('users.id')),
+                db.Column('subreddit_id', db.Integer,
+                          db.ForeignKey('subreddits.id')))
+
+
 class User(UserMixin, db.Model):
     __tablename__ = "users"
 
@@ -19,6 +25,16 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(120), unique=True)
     password_hash = db.Column(db.String(128))
     username = db.Column(db.String(50), unique=True)
+
+    subscriptions = db.relationship(
+        'Subreddit', secondary=subs,
+        backref=db.backref('subscribers', lazy='dynamic'),
+        lazy='dynamic')
+
+    my_subreddits = db.relationship('Subreddit', backref='creator',
+                                    lazy='dynamic')
+
+    posts = db.relationship('Post', backref='author', lazy='dynamic')
 
     def __init__(self, email, username):
         self.email = email
