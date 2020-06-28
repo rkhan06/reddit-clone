@@ -1,20 +1,139 @@
-.container-fluid {
-  padding-left: 0; }
+@font-face {
+  font-family: 'Open Sans';
+  src: url("static/fonts/Roboto-Regular.ttf") format('truetype'); }
 
+  html body {
+    width: 100%;
+    height: 100%;
+    font-family: 'Roboto';
+    background-color: #DAE0E6; }
+
+    button {
+      text-transform: uppercase; }
+
+      .navbar {
+        height: 48px; }
+
+        .container-fluid {
+          padding-left: 0;
+          width: 100%;
+          height: 100%; }
+
+          .sticky-top {
+            background-color: white;
+            padding: 0 20px;
+            height: 48px; }
+
+            .auth-side-img {
+              height: 100vh;
+              max-width: 90%;
+              margin: 0;
+              float: left;
+              display: none; }
+
+              .btn-primary {
+                background-color: #0079D3;
+                width: 155px;
+                height: 35px; }
+
+                .auth-form {
+                  margin-top: 20px; }
+
+                  .auth-title {
+                    margin-top: 5px;
+                    margin-bottom: 20px; }
+
+                    .user-menu-dropdown {
+                      width: 175px;
+                      text-align: center; }
+                      .user-menu-dropdown .dropdown-item {
+                        width: 175px;
+                        text-align: center; }
+
+.auth-container {
+  background-color: white;
+  height: 100%;
+  text-align: center; }
+
+  .post-card {
+    max-width: 640px;
+    border-radius: 5px;
+    margin-top: 10px;
+    border: 1px solid rgba(135, 138, 140, 0.5); }
+    .post-card .card {
+      height: 186px;
+      border-radius: 0 5px 5px 0; }
+      .post-card .card-text {
+        font-weight: 600; }
+        .post-card .card-header {
+          height: 30px;
+          padding: 5px;
+          background-color: white;
+          border: 0; }
+          .post-card .card-header a {
+            color: black;
+            font-weight: 600; }
+    .post-card .card-footer {
+      background-color: white;
+      height: 30px;
+      padding: 5px;
+      border: 0; }
+      .post-card .vote-div {
+        background-color: rgba(248, 245, 242, 0.8);
+        border-radius: 5px 0 0 5px; }
+
+.sub-img {
+  border-radius: 20px; }
+
+  .trending_card .card {
+    width: 21rem; }
+    .trending_card button {
+      font-size: 12px;
+      line-height: 24px;
+      padding: 4px 9px 2px;
+      width: 100px;
+      font-weight: 700;
+      letter-spacing: 0.5px; }
+      .trending_card .list-group {
+        border: 0; }
+        .trending_card li {
+          border: 0; }
+          .trending_card .card-header {
+            border: 0;
+            background-color: white; }
+
+.card a {
+  color: black;
+  font-weight: 400; }
+
+.icon {
+  width: 30px;
+  height: 30px;
+  padding: 8px;
+  border-radius: 3px; }
+  .icon:hover {
+    background-color: #cfcdcd; }
+    .icon:hover .fas {
+      color: orangered; }
+
+.white-wall {
+  background-color: white;
+  width: 100%;
+  height: 100%;
+  margin: 0; }
+
+  .side-img {
+    height: 100%; }
+
+    .create-post-card {
+      margin-top: 20px; }
+      .create-post-card .card-header {
+        border: 0;
+        background-color: white; }
+
+@media screen and (min-width: 576px) {
   .auth-side-img {
-    height: 100vh;
-    width: 200px;
-    margin: 0;
-    float: left; }
-
-    .btn-primary {
-      background-color: #0079D3;
-      width: 155px;
-      height: 35px; }
-
-      .auth-form {
-        margin-top: 20px; }
-
-        .auth-title {
-          margin-top: 5px;
-          margin-bottom: 20px; }
+    display: block;   }
+    .auth-container {
+      text-align: left;   }
+}

@@ -1,0 +1,18 @@
+{% extends 'core/layout.html' %}
+
+{% from '_submitcard.html' import submit_card %}
+
+{% block middle %}
+<div class="row justify-content-center">
+    <div class="col-sm-5 col-md-5 middle">
+        {{ submit_card(form) }}
+    </div>
+
+    <div class="col-sm-2 col-md-2 middle">
+
+    </div>
+
+
+</div>
+
+{% endblock %}

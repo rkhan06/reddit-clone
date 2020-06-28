@@ -1,0 +1,65 @@
+{% macro card(post) %}
+
+<div class="post-card">
+    <div class="row no-gutters">
+        <div class="col-sm-1 col-md-1 vote-div">
+            <div class="row no-gutters justify-content-center">
+                <form action="{{ url_for('core.upvote', id = post.id ) }}" method="POST">
+                    {{ empty_form.csrf_token }}
+                    {{ empty_form.submit(value='|') }}
+                </form>
+                <span class="icon upvote">
+                    <i class="fas fa-arrow-up">
+                    </i>
+                </span>
+
+            </div>
+            <div class="row no-gutters justify-content-center">
+                <small><b> {{ post.upvotes.count() - post.downvotes.count()  }} </b> </small>
+            </div>
+            <div class="row no-gutters justify-content-center">
+                <span class="icon upvote">
+                    <i class="fas fa-arrow-down"></i>
+                </span>
+                <form action="{{ url_for('core.downvote', id = post.id ) }}" method="POST">
+                    {{ empty_form.csrf_token }}
+                    {{ empty_form.submit(value='|') }}
+                </form>
+            </div>
+        </div>
+        <div class="col-sm-11 col-md-11">
+            <div class="card">
+
+                <div class="card-header">
+
+                    <small class="text-muted">
+                        <a href="{{ url_for('subreddit.home', name=post.subreddit.name) }}">
+                            <img class="sub-img" src="{{ url_for('static', filename='img/default-subreddit-30.png') }}"
+                                alt="" width="20px">
+                            r/{{ post.subreddit.name }}
+                        </a>
+                        Posted by u/{{ post.author.username }}
+                    </small>
+                </div>
+                <div class="card-body">
+                    <p class="card-text title">{{ post.title }}</p>
+                    <p class="description">
+                        {{ post.description }}
+                    </p>
+                </div>
+                <div class="card-footer text-muted">
+                    <small>
+                        
+                        <span class="icon comment-icon">
+                            <i class="fas fa-comment-alt"></i>
+                            <a href="" class="comment-link">
+                            2 Comments
+                        </span>
+                    </a>
+                        </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endmacro %}

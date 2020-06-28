@@ -1,12 +1,16 @@
 {% extends 'base.html' %}
 
+<!-- {% block topbar %}
+{% endblock %} -->
+
 {% block content %}
-<div class="row">
-    <div class="col-md-2 col-lg-2">
-        <img src="{{ url_for('static', filename='img/auth-background.png') }}" alt="" class="auth-side-img">
+
+<div class="row auth-container">
+    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+        <img src="{{ url_for('static', filename='img/auth-background.png') }}" alt="" class="img-fluid side-img">
     </div>
-    <div class="col-md-5 col-lg-5 my-auto">
-        <img src="{{ url_for('static', filename='img/logo.png') }}" alt="reddit" width="50px">
+    <div class="col-xs-10 col-sm-10 col-md-5 col-lg-5 my-auto">
+        <img class="img-fluid" src="{{ url_for('static', filename='img/logo.png') }}" alt="reddit" width="50px">
         {% block form %}
         {% endblock %}
     </div>

@@ -1,18 +1,23 @@
-{% extends 'base.html' %}
+{% extends 'core/layout.html' %}
+{% from "_postcard.html" import card with context %}
+{% from "_infocard.html" import trending_card with context %}
 
-{% block content %}
-<a href="{{ url_for('auth.logout') }}">logout</a>
-<a href="{{ url_for('subreddit.create') }}">Create community</a>
-<h3>Users</h3>
-<ul>
-    {% for user in users%}
-    <li>{{ user.username }}</li>
-    {% endfor %}
-</ul>
-<h3>subreddits</h3>
-<ul>
-    {% for sub in subreddits%}
-    <li><a href="{{ url_for('subreddit.subreddit', name=sub.name )}}">r/{{ sub.name }}</a></li>
-    {% endfor %}
-</ul>
+{% block middle %}
+<div class="row justify-content-center">
+
+    <div class="col-sm-5 col-md-5 middle">
+        {% for post in posts %}
+        {{ card(post) }}
+        {% endfor %}
+    </div>
+
+    <div class="col-sm-2 col-md-2 middle">
+        <a href="{{ url_for('subreddit.create') }}">Create community</a>
+        <a href="{{ url_for('core.create_post') }}">Create post</a>
+        
+        {{ trending_card() }}
+
+    </div>
+
+</div>
 {% endblock %}

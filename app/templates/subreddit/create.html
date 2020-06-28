@@ -2,18 +2,28 @@
 
 {% block content %}
 
-{% from "_formhelper.html" import render_field %}
+{% from "_formhelper.html" import render_field_with_label %}
+    <div class="row auth-container">
+        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+            <img src="{{ url_for('static', filename='img/community.png') }}" alt="" class="img-fluid auth-side-img">
+        </div>
+        <div class="col-xs-10 col-sm-10 col-md-5 col-lg-5 my-auto">
+            <h4>Create Community</h4>
+            <small class="text-muted">Community names including capitalization cannot be changed.</small>
+            <hr>
+            <form method="POST" action="">
 
-<h3>Create Community</h3>
+                {{ form.csrf_token }}
+                {{ render_field_with_label(form.name, class="form-control", placeholder="Community Name") }}
+                {{ render_field_with_label(form.description, class="form-control", placeholder="Description") }}
+                <br>
+                
+                <input type="submit" value="Create Community" class="btn btn-primary">
+        
+            </form>
+        </div>
+    
+    
+    </div>
 
-    <form method="POST" action="">
-
-        {{ form.csrf_token }}
-        {{ render_field(form.name, class="form-control", placeholder="Community Name") }}
-        {{ render_field(form.description, class="form-control", placeholder="Description") }}
-        <br>
-        <input type="submit" value="Create" class="btn btn-primary">
-
-    </form>
-</div>
 {% endblock %}

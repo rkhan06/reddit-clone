@@ -64,5 +64,17 @@ class User(UserMixin, db.Model):
     def check_password(self, raw_password):
         return check_password_hash(self.password_hash, raw_password)
 
+    def is_subscribed(self, subreddit):
+        return self.subscriptions.filter(
+            subs.c.subreddit_id == subreddit.id).count() > 0
+
+    def subscribe(self, subreddit):
+        if not self.is_subscribed(subreddit):
+            self.subscriptions.append(subreddit)
+
+    def unsubscribe(self, subreddit):
+        if self.is_subscribed(subreddit):
+            self.subscriptions.remove(subreddit)
+
     def __repr__(self):
         return '<User %r>' % (self.username)

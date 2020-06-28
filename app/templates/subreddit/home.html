@@ -1,0 +1,42 @@
+{% extends 'core/layout.html' %}
+{% from "_postcard.html" import card with context%}
+{% from "_formhelper.html" import render_field %}
+
+{% block middle %}
+
+
+
+<h4>Create Post</h4>
+
+<form method="POST" action="">
+    {{ form.csrf_token }}
+    {{ render_field(form.description, class="form-control", placeholder="Whats on your mind ?") }}
+    <br>
+    <input type="submit" value="Create" class="btn btn-primary">
+
+</form>
+<div class="row justify-content-center">
+
+    <div class="col-sm-5 col-md-5 middle">
+        {% for post in posts %}
+
+        {{ card(post) }}
+
+        {% endfor %}
+    </div>
+
+    <div class="col-sm-2 col-md-2 middle">
+        <a href="{{ url_for('subreddit.create') }}">Create community</a>
+
+        <hr>
+        <h3>subreddits</h3>
+        <ul>
+            {% for sub in subreddits%}
+            <li><a href="{{ url_for('subreddit.home', name=sub.name )}}">r/{{ sub.name }}</a></li>
+            {% endfor %}
+        </ul>
+
+    </div>
+
+</div>
+{% endblock %}

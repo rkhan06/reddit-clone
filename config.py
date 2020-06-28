@@ -8,6 +8,7 @@ load_dotenv(os.path.join(basedir, '.env'))
 class Config(object):
     FLASK_ENV = os.getenv('FLASK_ENV')
     SECRET_KEY = os.getenv('SECRET_KEY')
+    LOGIN_URL = 'auth.login'
     TESTING = False
 
     # DATABASE SETUP

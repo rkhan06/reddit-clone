@@ -1,0 +1,29 @@
+{% macro submit_card(form) %}
+
+{% from '_formhelper.html' import render_field %}
+<div class="card create-post-card">
+    <h5 class="card-header">
+        <span class="">
+            <i class="fas fa-pencil-alt"></i>
+        </span> 
+        Create Post
+    </h5>
+    <div class="card-body">
+      <p class="card-text">
+        <form method="POST" action="">
+
+          {{ form.csrf_token }}
+          {{ render_field(form.community, class="form-control form-control-lg") }}
+          {{ render_field(form.title, class="form-control", placeholder="Title (Max 300)") }}
+          {{ render_field(form.description, class="form-control",
+             placeholder="Description (Optional)") }}
+          <br>
+          <input type="submit" value="Create Post" class="btn btn-primary">
+  
+      </form>
+      </p>
+      
+    </div>
+  </div>
+
+{% endmacro %}

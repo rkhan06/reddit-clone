@@ -24,6 +24,7 @@ MarkupSafe==1.1.1
 mccabe==0.6.1
 ordereddict==1.1
 pkg-resources==0.0.0
+psycopg2==2.8.5
 pycodestyle==2.6.0
 pyflakes==2.2.0
 PyJWT==1.7.1
