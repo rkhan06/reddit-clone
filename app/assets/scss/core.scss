@@ -5,15 +5,15 @@ $light-gray :rgba(248, 245, 242, 0.8);
 $dark-gray :rgba(135,138,140,0.5);
 
 @font-face {
-    font-family: 'Open Sans';
-    src: url("static/fonts/Roboto-Regular.ttf") format('truetype');
+    font-family: 'roboto';
+    src: url("../fonts/Roboto-Regular.ttf") format('truetype');
 }
 
 
 html body{
     width: 100%;
     height: 100%;
-    font-family: 'Roboto';
+    font-family: 'roboto';
     background-color: $site-background;
 }
 
@@ -27,9 +27,18 @@ button{
 
 .container-fluid{
     padding-left:0;
-    // padding-right: 0;
-    width: 100%;
+    padding-right: 0;
+    // width: 100%;
     height: 100%;
+}
+
+.row{
+    padding: 0;
+    margin: 0;
+    .col{
+        padding: 0;
+        margin: 0;
+    }
 }
 
 .sticky-top{
@@ -77,13 +86,23 @@ button{
 }
 
 .post-card{
-    max-width: 640px;
-    border-radius: 5px;
-    margin-top: 10px;
+    max-width: 100%;
+    border-radius: 4px;
+    margin-top: 14px;
     border:1px solid $dark-gray;
+
+    .child-comment{
+        margin-left: 60px;
+        margin-top: 15px;
+        .row{
+        border-left: 1px solid $dark-gray;
+        }
+    }
     .card{
-        height: 186px;
-        border-radius: 0 5px 5px 0;
+        min-height: 136px;
+        max-height: auto;
+        border-radius: 0 4px 4px 0;
+        border: 0;
     }
     .card-text{
         font-weight: 600;
@@ -102,11 +121,26 @@ button{
         background-color: white;
         height: 30px;
         padding: 5px;
+        padding-left: 0;
         border: 0;
     }
     .vote-div{
-        background-color: $light-gray;
+        background-color: #F6F7F8;
         border-radius: 5px 0 0 5px;
+    }
+    .comment-link{
+        width: 30px;
+        height: 30px;
+        padding: 5px;
+        border-radius: 3px;
+        font-size: 12px;
+        a{
+            text-decoration: none;
+            font-weight: 600;
+        }
+        &:hover{
+            background-color: $dark-gray;
+        }
     }
 }
 
@@ -115,9 +149,6 @@ button{
 }
 
 .trending_card{
-    .card{
-        width: 21rem;
-    }
     button{
         font-size: 12px;
         line-height: 24px;
@@ -143,8 +174,17 @@ button{
         color: black;
         font-weight: 400;
     }
+    p{
+        margin-bottom: 2px;
+    }
 }
 
+.comment-footer{
+    padding-top: 10px;
+    .icon{
+        padding-left: 2px;
+    }
+}
 
 .icon{
     width: 30px;
@@ -156,6 +196,17 @@ button{
         .fas{
             color: $orange;
         }
+    }
+}
+
+.icon-voted{
+    width: 30px;
+    height: 30px;
+    padding: 8px;
+    border-radius: 3px;
+    background-color: rgb(207, 205, 205);
+    .fas{
+        color: $orange;
     }
 }
 
@@ -177,6 +228,63 @@ button{
     background-color: white;
     }
 }
+
+.info-card{
+    width: 312px;
+    margin-top: 20px;
+    .card-header{
+        background-color: white;
+        border: 0;
+    }
+}
+
+.subreddit-header{
+    background-color: white;
+    width: 100%;
+    height: 170px;
+}
+
+.header-top{
+    background-color: #33a8ff;
+    width: 100%;
+    height: 85px;
+}
+.header-bottom{
+    width: 100%;
+    height: 85px;
+    .sub-title{
+        font-weight: 1000;
+        padding: 10px;
+    }
+    img{
+        border-radius: 50px;
+        position: absolute;
+        bottom: 0;
+        background-color: white;
+    }
+}
+
+.post-vote-div{
+    background-color: white;
+    border-radius: 5px 0 0 5px;
+}
+
+.comment-votes{
+    ul{
+        list-style-type: none;
+        padding: 0;
+    }
+    display: grid;
+    place-items: center;
+}
+
+.reply-form{
+    margin-left: 61px;
+    padding: 20px;
+    display: none;
+    border-left: 1px solid $dark-gray;
+}
+
 
 
 // Small devices (landscape phones, 576px and up)
