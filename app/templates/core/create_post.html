@@ -1,6 +1,7 @@
 {% extends 'core/layout.html' %}
 
-{% from '_submitcard.html' import submit_card %}
+{% from 'macros/_submitcard.html' import submit_card %}
+{% from 'macros/_infocard.html' import rules_card %}
 
 {% block middle %}
 <div class="row justify-content-center">
@@ -9,7 +10,7 @@
     </div>
 
     <div class="col-sm-2 col-md-2 middle">
-
+        {{ rules_card() }}
     </div>
 
 

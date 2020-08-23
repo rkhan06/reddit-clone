@@ -1,0 +1,81 @@
+{% macro trending_card() %}
+<div class="trending_card info-card">
+    <div class="card">
+        <div class="card-header">
+            <b> Trending Communities </b>
+        </div>
+        <ul class="list-group list-group-flush">
+            {% for sub in subreddits %}
+
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <div>
+                    <a href="{{ url_for('subreddit.home', name=sub.name ) }}">
+                        <img class="sub-img" src="{{ url_for('static', filename='img/default-subreddit.png') }}" alt=""
+                            width="30px"> r/{{ sub.name }}
+                    </a><br>
+                    <small class="text-muted"><b>102,234 members</b></small>
+                </div>
+                {% if current_user.is_authenticated and current_user.is_subscribed(sub) and
+                    current_user.id != sub.creator.id %}
+                <form method="POST" action="{{ url_for('subreddit.unsubscribe', subreddit=sub.name) }}">
+                    {{ empty_form.csrf_token }}
+                    {{ empty_form.submit(value='Leave', class_='btn btn-danger') }}
+                </form>
+                {% elif current_user.id != sub.creator.id %}
+                <form method="POST" action="{{ url_for('subreddit.subscribe', subreddit=sub.name) }}">
+                    {{ empty_form.csrf_token }}
+                    {{ empty_form.submit(value='Join', class_='btn btn-primary') }}
+                </form>
+
+                {% endif %}
+
+
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+{% endmacro %}
+
+{% macro rules_card() %}
+<div class="rules-card info-card">
+    <div class="card">
+        <div class="card-header">
+            <img src="{{ url_for('static', filename='img/logo.png') }}" style="margin: 5px;" width="30px" alt="">
+            <b> Posting to Reddit </b>
+        </div>
+        <ol class="list-group">
+            <li class="list-group-item">1. <b> Rememeber the human </b></li>
+            <li class="list-group-item">2. <b>Behave like you would in real life </b></li>
+            <li class="list-group-item">3. <b>Look for the original source of content </b></li>
+            <li class="list-group-item">4. <b>Search for duplicates before posting </b></li>
+            <li class="list-group-item">5. <b>Read the community’s rules </b></li>
+        </ol>
+    </div>
+</div>
+
+{% endmacro %}
+
+{% macro community_card(subreddit) %}
+<div class="community-card info-card">
+    <div class="card">
+        <div class="card-header">
+            <b> About Community </b>
+        </div>
+        <div class="card-body">
+            <p class="card-text">
+                {{ subreddit.description }}
+            </p>
+            <div class="row">
+                <div class="col">104k Members</div>
+                <div class="col">14k Online</div>
+            </div>
+            <hr>
+            <p> Cake day {{ subreddit.date_created }}</p>
+            <button class="btn btn-primary">Create Post</button>
+        </div>
+    </div>
+</div>
+
+{% endmacro %}

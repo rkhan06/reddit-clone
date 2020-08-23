@@ -2,7 +2,7 @@
 
 {% block content %}
 
-{% from "_formhelper.html" import render_field_with_label %}
+{% from "macros/_formhelper.html" import render_field_with_label %}
     <div class="row auth-container">
         <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
             <img src="{{ url_for('static', filename='img/community.png') }}" alt="" class="img-fluid auth-side-img">

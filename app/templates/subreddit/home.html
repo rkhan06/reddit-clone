@@ -1,41 +1,38 @@
 {% extends 'core/layout.html' %}
-{% from "_postcard.html" import card with context%}
-{% from "_formhelper.html" import render_field %}
+{% from "macros/_postcard.html" import card with context%}
+{% from "macros/_formhelper.html" import render_field %}
+{% from "macros/_infocard.html" import community_card with context %}
+
+
 
 {% block middle %}
 
-
-
-<h4>Create Post</h4>
-
-<form method="POST" action="">
-    {{ form.csrf_token }}
-    {{ render_field(form.description, class="form-control", placeholder="Whats on your mind ?") }}
-    <br>
-    <input type="submit" value="Create" class="btn btn-primary">
-
-</form>
 <div class="row justify-content-center">
+    <div class="subreddit-header">
+        <div class="header-top"></div>
+        <div class="header-bottom">
+            <div class="row">
+                <div class="col-sm-1 offset-sm-3">
+                    <div class="sub-img">
+                        <img src="{{ url_for('static', filename='img/default-subreddit.png') }}">
+                    </div>
+                </div>
+                <div class="col-sm-1">
+                    <h4 class="sub-title">{{ subreddit.name.title() }}</h4>
+                </div>
+            </div>
+
+        </div>
+    </div>
 
     <div class="col-sm-5 col-md-5 middle">
         {% for post in posts %}
-
-        {{ card(post) }}
-
+            {{ card(post) }}
         {% endfor %}
     </div>
 
     <div class="col-sm-2 col-md-2 middle">
-        <a href="{{ url_for('subreddit.create') }}">Create community</a>
-
-        <hr>
-        <h3>subreddits</h3>
-        <ul>
-            {% for sub in subreddits%}
-            <li><a href="{{ url_for('subreddit.home', name=sub.name )}}">r/{{ sub.name }}</a></li>
-            {% endfor %}
-        </ul>
-
+        {{ community_card(subreddit) }}
     </div>
 
 </div>

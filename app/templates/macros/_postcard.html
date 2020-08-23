@@ -4,34 +4,30 @@
     <div class="row no-gutters">
         <div class="col-sm-1 col-md-1 vote-div">
             <div class="row no-gutters justify-content-center">
-                <form action="{{ url_for('core.upvote', id = post.id ) }}" method="POST">
-                    {{ empty_form.csrf_token }}
-                    {{ empty_form.submit(value='|') }}
-                </form>
-                <span class="icon upvote">
+                {% if current_user.is_authenticated %}
+                <span class="{{ 'icon-voted' if post.is_upvoted(current_user) else 'icon' }}" id="upvote-{{post.id}}"
+                    onclick="upvote({{ post.id }})">
                     <i class="fas fa-arrow-up">
                     </i>
                 </span>
+                {% endif %}
 
             </div>
             <div class="row no-gutters justify-content-center">
-                <small><b> {{ post.upvotes.count() - post.downvotes.count()  }} </b> </small>
+                <small><b id="votes-{{post.id}}"> {{ post.votes() }} </b> </small>
             </div>
             <div class="row no-gutters justify-content-center">
-                <span class="icon upvote">
+                {% if current_user.is_authenticated %}
+                <span class="{{ 'icon-voted' if post.is_downvoted(current_user) else 'icon' }}"
+                    id="downvote-{{post.id}}" onclick="downvote({{post.id}})">
                     <i class="fas fa-arrow-down"></i>
                 </span>
-                <form action="{{ url_for('core.downvote', id = post.id ) }}" method="POST">
-                    {{ empty_form.csrf_token }}
-                    {{ empty_form.submit(value='|') }}
-                </form>
+                {% endif %}
             </div>
         </div>
         <div class="col-sm-11 col-md-11">
             <div class="card">
-
                 <div class="card-header">
-
                     <small class="text-muted">
                         <a href="{{ url_for('subreddit.home', name=post.subreddit.name) }}">
                             <img class="sub-img" src="{{ url_for('static', filename='img/default-subreddit-30.png') }}"
@@ -49,14 +45,13 @@
                 </div>
                 <div class="card-footer text-muted">
                     <small>
-                        
-                        <span class="icon comment-icon">
+                        <span class="comment-link">
                             <i class="fas fa-comment-alt"></i>
-                            <a href="" class="comment-link">
-                            2 Comments
+                            <a href="{{ url_for('subreddit.post', id=post.id, subreddit=post.subreddit.name ) }}">
+                               {{ post.comments.count() }} Comments
                         </span>
-                    </a>
-                        </small>
+                        </a>
+                    </small>
                 </div>
             </div>
         </div>
