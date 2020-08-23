@@ -19,3 +19,8 @@ class CreateCommunityForm(FlaskForm):
 
 class EmptyForm(FlaskForm):
     submit = SubmitField()
+
+
+class CommentForm(FlaskForm):
+    comment = TextAreaField('Comment', validators=[
+        DataRequired(), Length(min=2, max=50)])

@@ -1,4 +1,4 @@
-from flask import render_template, request, redirect, url_for
+from flask import render_template, request, redirect, url_for, jsonify
 from flask_login import current_user
 
 from app import db
@@ -45,29 +45,39 @@ def create_post():
     return render_template('core/create_post.html', form=form)
 
 
-@core.route('/upvote/<int:id>', methods=['POST'])
+@core.route('/upvote', methods=['POST'])
 @login_required
-def upvote(id):
-    post = Post.query.filter_by(id=id).first()
-    form = EmptyForm()
-
-    if form.validate_on_submit() and post is not None:
-        post.upvote(current_user)
+def upvote():
+    data = request.get_json()
+    post = Post.query.filter_by(id=data['post_id']).first()
+    response = dict()
+    if post is not None:
+        res = post.upvote(current_user)
         db.session.commit()
-        return redirect(url_for('core.index'))
+        response['message'] = 'success'
+        response['value'] = res
+        response['votes'] = post.votes()
+        return jsonify(response), 200
 
-    return redirect(url_for('core.index'))
+    response['message'] = 'error'
+
+    return jsonify(response), 200
 
 
-@core.route('/downvote/<int:id>', methods=['POST'])
+@core.route('/downvote', methods=['POST'])
 @login_required
-def downvote(id):
-    post = Post.query.filter_by(id=id).first()
-    form = EmptyForm()
-
-    if form.validate_on_submit() and post is not None:
-        post.downvote(current_user)
+def downvote():
+    data = request.get_json()
+    post = Post.query.filter_by(id=data['post_id']).first()
+    response = dict()
+    if post is not None:
+        res = post.downvote(current_user)
         db.session.commit()
-        return redirect(url_for('core.index'))
+        response['message'] = 'success'
+        response['value'] = res
+        response['votes'] = post.votes()
+        return jsonify(response), 200
 
-    return redirect(url_for('core.index'))
+    response['message'] = 'error'
+
+    return jsonify(response), 200

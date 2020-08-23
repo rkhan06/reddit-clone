@@ -35,6 +35,7 @@ class User(UserMixin, db.Model):
                                     lazy='dynamic')
 
     posts = db.relationship('Post', backref='author', lazy='dynamic')
+    comments = db.relationship('Comment', backref='author', lazy='dynamic')
 
     def __init__(self, email, username):
         self.email = email

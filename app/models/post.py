@@ -1,5 +1,6 @@
 from app import db
 from datetime import datetime
+from .comment import Comment
 
 
 post_upvotes = db.Table('post_upvotes',
@@ -28,6 +29,15 @@ class Post(db.Model):
     upvotes = db.relationship('User', secondary='post_upvotes', lazy='dynamic')
     downvotes = db.relationship('User', secondary='post_downvotes',
                                 lazy='dynamic')
+    comments = db.relationship('Comment', backref='post', lazy='dynamic')
+
+    def get_parent_comments(self):
+        return self.comments.filter(
+            Comment.parent_id == 0).all()
+
+    def get_child_comments(self):
+        return self.comments.filter(
+            Comment.parent_id > 0).all()
 
     def is_upvoted(self, user):
         return self.upvotes.filter(
@@ -38,6 +48,10 @@ class Post(db.Model):
             if self.is_downvoted(user):
                 self.downvotes.remove(user)
             self.upvotes.append(user)
+            return 1
+        else:
+            self.upvotes.remove(user)
+            return 2
 
     def is_downvoted(self, user):
         return self.downvotes.filter(
@@ -48,6 +62,13 @@ class Post(db.Model):
             if self.is_upvoted(user):
                 self.upvotes.remove(user)
             self.downvotes.append(user)
+            return 1
+        else:
+            self.downvotes.remove(user)
+            return 2
+
+    def votes(self):
+        return self.upvotes.count() - self.downvotes.count()
 
     def __repr__(self):
         return '<Subreddit {}>'.format(self.title)

@@ -28,5 +28,6 @@ def create_app(config_class=Config):
     app.register_blueprint(core_bp)
     from app.subreddit import subreddit as subreddit_bp
     app.register_blueprint(subreddit_bp)
+    from .models import comment, post, user, subreddit
 
     return app
