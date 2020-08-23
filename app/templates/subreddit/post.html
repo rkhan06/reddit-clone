@@ -1,0 +1,39 @@
+{% extends 'core/layout.html' %}
+{% from "macros/_post_detail.html" import detailed_card with context%}
+{% from "macros/_formhelper.html" import render_field %}
+{% from "macros/_infocard.html" import community_card with context %}
+
+
+
+{% block middle %}
+
+<div class="row justify-content-center">
+    <div class="subreddit-header">
+        <div class="header-top"></div>
+        <div class="header-bottom">
+            <div class="row">
+                <div class="col-sm-1 offset-sm-3">
+                    <div class="sub-img">
+                        <img src="{{ url_for('static', filename='img/default-subreddit.png') }}">
+                    </div>
+                </div>
+                <div class="col-sm-1">
+                    <h4 class="sub-title">{{ subreddit.name.title() }}</h4>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="col-sm-7 col-md-7 middle">
+
+        {{ detailed_card(post) }}
+
+    </div>
+
+    <div class="col-sm-2 col-md-2 middle">
+        {{ community_card(subreddit) }}
+    </div>
+
+</div>
+{% endblock %}
