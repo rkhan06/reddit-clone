@@ -1,6 +1,7 @@
 {% extends 'core/layout.html' %}
 {% from "macros/_postcard.html" import card with context %}
 {% from "macros/_infocard.html" import trending_card with context %}
+{% from "macros/_infocard.html" import create_card %}
 
 {% block middle %}
 <div class="row justify-content-center">
@@ -12,8 +13,7 @@
     </div>
 
     <div class="col-sm-2 col-md-2 middle">
-        <a href="{{ url_for('subreddit.create') }}">Create community</a>
-        <a href="{{ url_for('core.create_post') }}">Create post</a>
+        {{ create_card() }}
         
         {{ trending_card() }}
 

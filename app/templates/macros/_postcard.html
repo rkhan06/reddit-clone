@@ -4,25 +4,21 @@
     <div class="row no-gutters">
         <div class="col-sm-1 col-md-1 vote-div">
             <div class="row no-gutters justify-content-center">
-                {% if current_user.is_authenticated %}
-                <span class="{{ 'icon-voted' if post.is_upvoted(current_user) else 'icon' }}" id="upvote-{{post.id}}"
+                <span class="{{ 'icon-voted' if current_user.is_authenticated and post.is_upvoted(current_user) else 'icon' }}" id="upvote-{{post.id}}"
                     onclick="upvote({{ post.id }})">
                     <i class="fas fa-arrow-up">
                     </i>
                 </span>
-                {% endif %}
 
             </div>
             <div class="row no-gutters justify-content-center">
                 <small><b id="votes-{{post.id}}"> {{ post.votes() }} </b> </small>
             </div>
             <div class="row no-gutters justify-content-center">
-                {% if current_user.is_authenticated %}
-                <span class="{{ 'icon-voted' if post.is_downvoted(current_user) else 'icon' }}"
+                <span class="{{ 'icon-voted' if current_user.is_authenticated and post.is_downvoted(current_user) else 'icon' }}"
                     id="downvote-{{post.id}}" onclick="downvote({{post.id}})">
                     <i class="fas fa-arrow-down"></i>
                 </span>
-                {% endif %}
             </div>
         </div>
         <div class="col-sm-11 col-md-11">
