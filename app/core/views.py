@@ -5,6 +5,7 @@ from app import db
 from app.models.user import User
 from app.models.subreddit import Subreddit
 from app.models.post import Post
+from app.models.comment import Comment
 from flask_login import login_required
 from app.core import core
 from app.core.forms import PostForm
@@ -46,8 +47,15 @@ def create_post():
 
 
 @core.route('/upvote', methods=['POST'])
-@login_required
 def upvote():
+    if not current_user.is_authenticated:
+        response = {
+            'status':  'Not Authorized',
+            'message': 'Please login or signup to vote',
+            'link': url_for('auth.login')
+        }
+        return jsonify(response), 200
+
     data = request.get_json()
     post = Post.query.filter_by(id=data['post_id']).first()
     response = dict()
@@ -65,8 +73,14 @@ def upvote():
 
 
 @core.route('/downvote', methods=['POST'])
-@login_required
 def downvote():
+    if not current_user.is_authenticated:
+        response = {
+            'status':  'Not Authorized',
+            'message': 'Please login or signup to vote',
+            'link': url_for('auth.login')
+        }
+        return jsonify(response), 200
     data = request.get_json()
     post = Post.query.filter_by(id=data['post_id']).first()
     response = dict()
@@ -79,5 +93,69 @@ def downvote():
         return jsonify(response), 200
 
     response['message'] = 'error'
+
+    return jsonify(response), 200
+
+
+@core.route('/comment_upvote', methods=['POST'])
+def comment_upvote():
+    if not current_user.is_authenticated:
+        response = {
+            'status':  'Not Authorized',
+            'message': 'Please login or signup to vote',
+            'link': url_for('auth.login')
+        }
+        return jsonify(response), 200
+
+    data = request.get_json()
+    comment = Comment.query.filter_by(id=data['comment_id']).first()
+    response = dict()
+    if comment is not None:
+        res = comment.upvote(current_user)
+        db.session.commit()
+        response = {
+            'status': "success",
+            'message': 'upvoted comment successfully',
+            'value': res,
+            'votes': comment.votes()
+        }
+        return jsonify(response), 200
+
+    response = {
+        'status':  'error',
+        'message': 'Comment does not exist'
+    }
+
+    return jsonify(response), 200
+
+
+@core.route('/comment_downvote', methods=['POST'])
+def comment_downvote():
+    if not current_user.is_authenticated:
+        response = {
+            'status':  'Not Authorized',
+            'message': 'Please login or signup to vote',
+            'link': url_for('auth.login')
+        }
+        return jsonify(response), 200
+
+    data = request.get_json()
+    comment = Comment.query.filter_by(id=data['comment_id']).first()
+    response = dict()
+    if comment is not None:
+        res = comment.downvote(current_user)
+        db.session.commit()
+        response = {
+            'status': "success",
+            'message': 'downvoted comment successfully',
+            'value': res,
+            'votes': comment.votes()
+        }
+        return jsonify(response), 200
+
+    response = {
+        'status':  'error',
+        'message': 'Comment does not exist'
+    }
 
     return jsonify(response), 200
