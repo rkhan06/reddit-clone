@@ -263,27 +263,52 @@
 
 .create-card li {
   border: none; }
-  .create-card .btn-primary {
-    width: 100%;
-    height: 50px;
-    display: grid;
-    place-items: center;
-    font-weight: 600;
-    text-transform: uppercase;
-    color: white; }
-    .create-card .alt {
-      color: #33a8ff !important;
-      background: white !important;
-      border-color: #33a8ff !important; }
-      .create-card .alt:hover {
-        color: white;
-        background: #33a8ff; }
+  .create-card h6 {
+    font-weight: bold; }
+    .create-card p {
+      font-size: 16px; }
+      .create-card ul {
+        border: 0 !important; }
+        .create-card .btn-primary {
+          width: 100%;
+          height: 37px;
+          display: grid;
+          place-items: center;
+          font-weight: 600;
+          text-transform: uppercase;
+          color: white; }
+          .create-card img {
+            width: 100%;
+            height: 40px; }
+            .create-card .card-header {
+              height: 40px;
+              padding: 0; }
+
+.btn-inverse {
+  color: dodgerblue !important;
+  background: white !important;
+  border-color: #33a8ff !important; }
+  .btn-inverse:hover {
+    color: white !important;
+    background: #33a8ff !important; }
 
 .community-card .btn-primary {
   width: 100%; }
 
 .btn-primary {
-  text-transform: uppercase; }
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 14px; }
+
+  .navbar-nav li {
+    margin-right: 20px; }
+
+.dot {
+  height: 25px;
+  width: 25px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block; }
 
   @media screen and (min-width: 576px) {
     .auth-side-img {

@@ -350,23 +350,41 @@ button{
     li{
         border: none;
     }
+    h6{
+        font-weight: bold;
+    }
+    p{
+        font-size: 16px;
+    }
+    ul{
+        border: 0 !important;
+    }
     .btn-primary{
         width: 100%;
-        height: 50px;
+        height: 37px;
         display: grid;
         place-items: center;
         font-weight: 600;
         text-transform: uppercase;
         color: white;
     }
-    .alt{
-        color: #33a8ff !important;
-        background: white !important;
-        border-color: #33a8ff !important;
-        &:hover{
-            color: white;
-            background: #33a8ff;
-        }
+    img{
+        width: 100%;
+        height: 40px;
+    }
+    .card-header{
+        height: 40px;
+        padding: 0;
+    }
+}
+
+.btn-inverse{
+    color:dodgerblue !important;
+    background: white !important;
+    border-color: #33a8ff !important;
+    &:hover{
+        color: white !important;
+        background: #33a8ff !important;
     }
 }
 
@@ -378,6 +396,22 @@ button{
 
 .btn-primary{
     text-transform: uppercase;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.navbar-nav{
+    li{
+        margin-right: 20px;
+    }
+}
+
+.dot {
+    height: 25px;
+    width: 25px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
 }
 
 

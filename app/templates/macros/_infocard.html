@@ -1,12 +1,22 @@
 {% macro create_card() %}
 <div class="create-card info-card">
   <div class="card">
+    <div class="card-header">
+      <img src="{{ url_for('static', filename='img/home-banner.png') }}" alt="">
+    </div>
+    <div class="card-body">
+      <h6>Home</h6>
+      <p>
+        Your personal Reddit frontpage. Come here to check in with your favorite communities.
+      </p>
+    </div>
+
     <ul class="list-group list-group-flush">
       <li class="list-group-item d-flex justify-content-between align-items-center">
           <a href="{{ url_for('core.create_post') }}" class="btn btn-primary">Create Post</a>
       </li>
       <li class="list-group-item d-flex justify-content-between align-items-center">
-          <a href="{{ url_for('subreddit.create') }}" class="btn btn-primary alt">Create Community</a>
+          <a href="{{ url_for('subreddit.create') }}" class="btn btn-primary btn-inverse">Create Community</a>
       </li>
     </ul>
   </div>
