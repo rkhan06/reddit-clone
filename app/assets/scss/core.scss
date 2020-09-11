@@ -91,6 +91,23 @@ button{
     margin-top: 14px;
     border:1px solid $dark-gray;
 
+    .card-body{
+        padding-top: 4px;
+    }
+    .post-link{
+        color: dodgerblue;
+        font-size: 13px;
+    }
+    .link-indicator{
+        border: 1px solid dodgerblue;
+        border-radius: 4px;
+        display: grid;
+        height: 83px;
+        place-items: center;
+        .fas{
+            color: $blue;
+        }
+    }
     .child-comment{
         margin-left: 60px;
         margin-top: 15px;
@@ -103,6 +120,9 @@ button{
         max-height: auto;
         border-radius: 0 4px 4px 0;
         border: 0;
+        .row{
+            padding-right: 5px;
+        }
     }
     .card-text{
         font-weight: 600;
@@ -183,7 +203,7 @@ button{
         background-color: #33a8ff !important;
         color: white;
     }
-    .btn-primary{
+    .btn{
         width: 85px !important;
     }
 }
@@ -379,12 +399,12 @@ button{
 }
 
 .btn-inverse{
-    color:dodgerblue !important;
+    color:$blue !important;
     background: white !important;
-    border-color: #33a8ff !important;
+    border-color: $blue !important;
     &:hover{
         color: white !important;
-        background: #33a8ff !important;
+        background: $blue !important;
     }
 }
 
@@ -398,6 +418,7 @@ button{
     text-transform: uppercase;
     font-weight: bold;
     font-size: 14px;
+    letter-spacing: 1px;
 }
 
 .navbar-nav{
@@ -413,7 +434,9 @@ button{
     border-radius: 50%;
     display: inline-block;
 }
-
+.tab-content{
+    margin-top: 20px;
+}
 
 // Small devices (landscape phones, 576px and up)
 @media screen and (min-width: 576px) { 

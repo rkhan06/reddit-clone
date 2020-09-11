@@ -35,12 +35,27 @@
                         Posted by u/{{ post.author.username }}
                     </small>
                 </div>
-                <div class="card-body">
-                    <p class="card-text title">{{ post.title }}</p>
-                    <p class="description">
-                        {{ post.description }}
-                    </p>
+                <div class="row">
+                    <div class="col-md-10 col-lg-10 card-body">
+                        <p class="card-text title">{{ post.title }}</p>
+                        {% if post.description %}
+                        <p class="post-description">
+                            {{ post.description }}
+                        </p>
+                        {% endif %}
+                        {% if post.link %}
+                        <p><a class="post-link" href="{{ post.link }}">{{ post.short_link() }}</a> </p>
+                        {% endif %}
+                    </div>
+                    {% if post.link %}
+                    <div class="cold-md-2 col-lg-2 link-indicator">
+                        <a href="{{ post.link }}">
+                            <i class="fas fa-link"></i>
+                        </a>
+                    </div>
+                    {% endif %}
                 </div>
+
                 <div class="card-footer text-muted">
                     <small>
                         <span class="comment-link">

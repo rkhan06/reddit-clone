@@ -23,13 +23,17 @@ class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(300))
     timestamp = db.Column(db.DateTime, default=datetime.utcnow)
-    description = db.Column(db.String(500))
+    description = db.Column(db.Text, nullable=True)
+    link = db.Column(db.String(500), nullable=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     subreddit_id = db.Column(db.Integer, db.ForeignKey('subreddits.id'))
     upvotes = db.relationship('User', secondary='post_upvotes', lazy='dynamic')
     downvotes = db.relationship('User', secondary='post_downvotes',
                                 lazy='dynamic')
     comments = db.relationship('Comment', backref='post', lazy='dynamic')
+
+    def short_link(self):
+        return self.link[:35] + '...'
 
     def get_parent_comments(self):
         return self.comments.filter(

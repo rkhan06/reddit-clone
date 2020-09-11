@@ -67,6 +67,19 @@
     border-radius: 4px;
     margin-top: 14px;
     border: 1px solid rgba(135, 138, 140, 0.5); }
+    .post-card .card-body {
+      padding-top: 4px; }
+      .post-card .post-link {
+        color: dodgerblue;
+        font-size: 13px; }
+        .post-card .link-indicator {
+          border: 1px solid dodgerblue;
+          border-radius: 4px;
+          display: grid;
+          height: 83px;
+          place-items: center; }
+          .post-card .link-indicator .fas {
+            color: #0079D3; }
     .post-card .child-comment {
       margin-left: 60px;
       margin-top: 15px; }
@@ -77,16 +90,18 @@
       max-height: auto;
       border-radius: 0 4px 4px 0;
       border: 0; }
-      .post-card .card-text {
-        font-weight: 600; }
-        .post-card .card-header {
-          height: 30px;
-          padding: 5px;
-          background-color: white;
-          border: 0; }
-          .post-card .card-header a {
-            color: black;
-            font-weight: 600; }
+      .post-card .card .row {
+        padding-right: 5px; }
+    .post-card .card-text {
+      font-weight: 600; }
+      .post-card .card-header {
+        height: 30px;
+        padding: 5px;
+        background-color: white;
+        border: 0; }
+        .post-card .card-header a {
+          color: black;
+          font-weight: 600; }
     .post-card .card-footer {
       background-color: white;
       height: 30px;
@@ -138,7 +153,7 @@
                 border: 0;
                 background-color: #33a8ff !important;
                 color: white; }
-                .trending_card .btn-primary {
+                .trending_card .btn {
                   width: 85px !important; }
 
 .card a {
@@ -285,12 +300,12 @@
               padding: 0; }
 
 .btn-inverse {
-  color: dodgerblue !important;
+  color: #0079D3 !important;
   background: white !important;
-  border-color: #33a8ff !important; }
+  border-color: #0079D3 !important; }
   .btn-inverse:hover {
     color: white !important;
-    background: #33a8ff !important; }
+    background: #0079D3 !important; }
 
 .community-card .btn-primary {
   width: 100%; }
@@ -298,7 +313,8 @@
 .btn-primary {
   text-transform: uppercase;
   font-weight: bold;
-  font-size: 14px; }
+  font-size: 14px;
+  letter-spacing: 1px; }
 
   .navbar-nav li {
     margin-right: 20px; }
@@ -310,9 +326,12 @@
   border-radius: 50%;
   display: inline-block; }
 
-  @media screen and (min-width: 576px) {
-    .auth-side-img {
-      display: block;   }
-      .auth-container {
-        text-align: left;   }
+  .tab-content {
+    margin-top: 20px; }
+
+    @media screen and (min-width: 576px) {
+      .auth-side-img {
+        display: block;   }
+        .auth-container {
+          text-align: left;   }
 }

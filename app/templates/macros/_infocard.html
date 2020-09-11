@@ -45,7 +45,7 @@
                     current_user.id != sub.creator.id %}
         <form method="POST" action="{{ url_for('subreddit.unsubscribe', subreddit=sub.name) }}">
           {{ empty_form.csrf_token }}
-          {{ empty_form.submit(value='Leave', class_='btn btn-danger') }}
+          {{ empty_form.submit(value='Leave', class_='btn btn-inverse') }}
         </form>
         {% elif current_user.id != sub.creator.id %}
         <form method="POST" action="{{ url_for('subreddit.subscribe', subreddit=sub.name) }}">

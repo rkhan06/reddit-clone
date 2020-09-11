@@ -2,23 +2,21 @@ from flask import render_template, request, redirect, url_for, jsonify
 from flask_login import current_user
 
 from app import db
-from app.models.user import User
 from app.models.subreddit import Subreddit
 from app.models.post import Post
 from app.models.comment import Comment
 from flask_login import login_required
 from app.core import core
-from app.core.forms import PostForm
+from app.core.forms import PostForm, ImageForm, LinkForm
 from app.subreddit.forms import EmptyForm
 
 
 @core.route('/', methods=['GET', 'POST'])
 def index():
-    users = User.query.all()
-    posts = Post.query.all()
+    posts = Post.query.order_by(Post.timestamp.desc())
     subreddits = Subreddit.query.all()
     empty_form = EmptyForm()
-    return render_template('core/index.html', users=users,
+    return render_template('core/index.html',
                            subreddits=subreddits, posts=posts,
                            empty_form=empty_form)
 
@@ -26,24 +24,40 @@ def index():
 @core.route('/create-post', methods=['GET', 'POST'])
 @login_required
 def create_post():
-    form = PostForm()
+    postform = PostForm(prefix='postform')
+    imageform = ImageForm(prefix='imageform')
+    linkform = LinkForm(prefix='linkform')
     default_choice = [(0, 'Choose Community')]
-    form.community.choices = default_choice + [
-        (sub.id, "r/"+sub.name) for sub in Subreddit.query.all()]
+    linkform.community.choices = imageform.community.choices = \
+        postform.community.choices = default_choice + [
+            (sub.id, "r/"+sub.name) for sub in Subreddit.query.all()]
 
     if request.method == 'POST':
-        if form.validate_on_submit():
+        # submit post form
+        if postform.validate_on_submit() and postform.submit.data:
             community = Subreddit.query.filter_by(
-                id=form.community.data).first()
-            new_post = Post(title=form.title.data,
-                            description=form.description.data,
+                id=postform.community.data).first()
+            new_post = Post(title=postform.title.data.strip(),
+                            description=postform.description.data.strip(),
+                            subreddit=community,
+                            author=current_user)
+            db.session.add(new_post)
+            db.session.commit()
+            return redirect(url_for('core.index'))
+        # submit link post
+        if linkform.validate_on_submit() and linkform.submit.data:
+            community = Subreddit.query.filter_by(
+                id=linkform.community.data).first()
+            new_post = Post(title=linkform.title.data,
+                            link=linkform.link.data,
                             subreddit=community,
                             author=current_user)
             db.session.add(new_post)
             db.session.commit()
             return redirect(url_for('core.index'))
 
-    return render_template('core/create_post.html', form=form)
+    return render_template('core/create_post.html', postform=postform,
+                           imageform=imageform, linkform=linkform)
 
 
 @core.route('/upvote', methods=['POST'])

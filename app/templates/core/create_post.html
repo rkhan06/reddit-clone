@@ -1,12 +1,12 @@
 {% extends 'core/layout.html' %}
 
-{% from 'macros/_submitcard.html' import submit_card %}
+{% from 'macros/_submitcard.html' import submit_card with context %}
 {% from 'macros/_infocard.html' import rules_card %}
 
 {% block middle %}
 <div class="row justify-content-center">
     <div class="col-sm-5 col-md-5 middle">
-        {{ submit_card(form) }}
+        {{ submit_card() }}
     </div>
 
     <div class="col-sm-2 col-md-2 middle">

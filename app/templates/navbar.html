@@ -21,10 +21,12 @@
             </li>
             {% endif %}
         </ul>
+        {% if not current_user.is_authenticated %}
         <ul class="navbar-nav">
-            <li><a href="" class="btn btn-primary">Log in</a></li>
-            <li><a href="" class="btn btn-primary btn-inverse">Sign up</a></li>
+            <li><a href="{{ url_for('auth.login') }}" class="btn btn-primary">Log in</a></li>
+            <li><a href="{{ url_for('auth.register') }}" class="btn btn-primary btn-inverse">Sign up</a></li>
         </ul>
+        {% endif %}
     </div>
 </nav>
 

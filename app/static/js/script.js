@@ -29,7 +29,7 @@ $(document).ready(function () {
             if (data.status === 'Not Authorized') {
                 window.location.href = data.link;
             }
-            else {
+            if (data.value === 2) {
                 replaceClass('icon-voted', 'icon', upvoteId)
                 document.getElementById('votes-' + post_id).innerHTML = data.votes;
             }
@@ -59,7 +59,7 @@ $(document).ready(function () {
             if (data.status === 'Not Authorized') {
                 window.location.href = data.link;
             }
-            else {
+            if (data.value === 2) {
                 replaceClass('icon-voted', 'icon', downvoteId)
                 document.getElementById('votes-' + post_id).innerHTML = data.votes;
             }
@@ -100,7 +100,7 @@ $(document).ready(function () {
             if (data.status === 'Not Authorized') {
                 window.location.href = data.link;
             }
-            else {
+            if (data.value === 2) {
                 replaceClass('icon-voted', 'vote-icon', upvoteId)
                 document.getElementById('comment-votes-' + comment_id).innerHTML = data.votes + " points";
             }
@@ -130,7 +130,7 @@ $(document).ready(function () {
             if (data.status === 'Not Authorized') {
                 window.location.href = data.link;
             }
-            else {
+            if (data.value === 2) {
                 replaceClass('icon-voted', 'vote-icon', downvoteId)
                 document.getElementById('comment-votes-' + comment_id).innerHTML = data.votes + " points";
             }
